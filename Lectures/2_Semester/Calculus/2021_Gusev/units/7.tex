@@ -1,0 +1,145 @@
+\lecture{7}{Дифференциалы высших порядков. Продолжение.}
+
+	Основные определения и свойства, введенные и доказанные ранее:
+\begin{enumerate}
+			\item $f : U \to \R^m,$ где $U \subset \R^n$ называется \textbf{дифференцируемой} в точке $x_0 \in U,$ если $\exists A \in \R^{m\times n}$ (матрица Якоби) такая, что $\exists \delta > 0 : \forall h \in B_{\delta}(0)$ выполнено
+	\[ f(x_0 + h) = f(x_0) + Ah + o(|h|), \text{при } h \to 0. \]
+	Часто используется обозначение $f'(x_0) = A$
+			\item Пусть $\nu \in \R^n : |\nu|  = 1,$ если $\varphi(t) = f(x_0 + t\nu)$ дифференцируема в $t = 0,$ то 
+			\[ \frac{\partial f}{\partial \nu} (x_0) = \varphi'(0) = \lim_{t \to 0} \frac{f(x_0  + t\nu) - f(x_0)}{t} \]
+			называется \textbf{производной $f$ по направлению} $\nu$. Часто пишут $\partial_{\nu} f(x)$
+			\item Если $\nu = e_i -$ $i$-ый базисный вектор, то $\frac{\partial f}{\partial e_i}(x_0) = \frac{\partial f}{\partial x_i}(x_0)$ называется \textbf{частной производной} по переменной $x_i.$  Также пишут $\partial_{x_i}f$
+			\item Если $f$ дифференцируема в $x_0 \in U,$ то функция $df_{x_0} : \R^n \to \R^m$ вида 
+			\[ df_{x_0}(h) = f'(x_0)h \]
+			называется \textbf{дифференциалом} $f$ в точке $x_0$. Иногда будем рассматривать $df_{x_0}(h)$ как функцию $df(x_0, h)$
+			\item Пусть 
+				\[ \frac{\partial^{k-1} f(x)}{\partial x_{i_2} \ldots \partial x_{i_{k}}}, \text{ тогда } \frac{\partial}{\partial x_{i_1}}\left( \frac{\partial^{k-1} f(x)}{\partial x_{i_2} \ldots \partial x_{i_{k}}}\right) = \frac{\partial^{k} f(x)}{\partial x_{i_1} \ldots \partial x_{i_{k}}} \]
+				называется производной $k$-ого порядка
+			\item \[ f \in C^k(U)^m \Leftrightarrow \forall i_1, \ldots, i_k \in \overline{1,n} \text{ } \frac{\partial f(x)}{\partial x_{i_1} \ldots x_{i_k}} \text{ непрерывны на } U \]
+\end{enumerate}
+
+\begin{definition}
+	$f -$ дифференцируема $k$ раз в точке $x_0 \in U,$ если в некоторой окрестности у $f$ существуют все частные производные порядка $k - 1$ и они дифференцируемы в $x_0$
+\end{definition}
+
+\begin{definition}
+	Дифференциалом порядка $k$ функции $f$ называется функция $d^kf_x : (\R^n)^k \to \R_m$ вида
+	\[ d^kf_x(h_k) = dg_x(h_k), \text{ где } g(y) = d^{k - 1}f_y(h_1, \ldots, h_{k - 1}) \]
+\end{definition}
+
+\begin{remark}
+	На практике нас не интересуют случаи, когда $h_1, \ldots, h_k$ в определении дифференциала разные, таким образом, можно переписать в следующем виде:
+	\[ d^kf_x(h_1, \ldots, h_k) = d^kf_x(h, \ldots, h) \]
+	Также будем использовать обозначение:
+	\[ d^kf(x, h_1, \ldots, h_k) = d^kf_x (h_1, \ldots, h_k) \]
+	\[ d^kf(x, h) = d^kf_x (h) \]
+\end{remark}
+
+\begin{definition}
+	$\varphi(x)$ называется однородной функцией степени $k,$ если $\forall t \in \R$ выполнено $\varphi(tx) = t^k \varphi(x)$
+\end{definition}
+
+\begin{claim}
+	Пусть $f : U \to \R,$ где $U \subset \R^n,$ дифференцируема $k$ раз в $x_0$ тогда
+	\[ d^kf(x_0, h) = \sum_{i_1 = 1}^n \ldots \sum_{i_k = 1}^n \frac{\partial^kf}{\partial x_{i_1} \ldots \partial x_{i_k}}(x_0) h_{i_1} \ldots h_{i_k} \]
+	\begin{proof}
+		\[ d\frac{\partial^{k-1}f}{\partial x_{i_2} \ldots \partial x_{i_n}}(x_0) = \sum_{i_1 = 1}^n \frac{\partial^k f}{\partial x_1 \ldots \partial x_n}(x_0) h_{i_1} \]
+	\end{proof}\\
+	То есть $d^kf(x, h) - $ однородный многочлен степени $k$ от переменной $h$
+\end{claim}
+
+\begin{theorem}
+	Пусть $f$ дифференцируема $k$ раз в $x_0 \in U$, тогда
+	\[ \forall i, j \in \overline{1,n} \text{ } \frac{\partial^2 f}{\partial x_i \partial x_j} (x_0) = \frac{\partial^2 f}{\partial x_j \partial x_i}(x_0) \]
+	\begin{proof}
+		Пусть $m = 1, n = 2$, пусть $f$ дважды дифференцируема в $(0, 0),$  покажем, что $f''_{xy}(0, 0) = f''_{yx}(0, 0)$. Рассмотрим следующее выражение:
+\[ A = \Big(f(x, y) - f(x, 0)\Big) - \Big(f(0, y) - f(0, 0)\Big) = \]
+	\[ = \Big(f(x, y) - f(0, y)\Big) - \Big(f(x, 0) - f(0, 0)\Big) = \]
+	\[ = f(x, y) - f(x, 0) - f(0, y) + f(0, 0) \]
+	Рассмотрим $\varphi(x) = f(x, y) - f(x, 0),$ можно заметить, что $A = \varphi(x) - \varphi(0)$ и $\varphi'(x) = f'_x(x, y) - f'_x(x, 0)$. Для функции $\varphi$ по теореме Лагранжа 
+		\[ \exists \xi \in (0, x) : A = \varphi(x) - \varphi(0) = \varphi'(\xi) \cdot (x - 0) = (f'_x(\xi, y) - f'_x(\xi, 0)) x  \]
+	Аналогично применяя теорему Лагранжа к функции $\psi(y) = f(x, y) - f(0, y),$ можно получить следующее выражение:
+		\[ \exists \eta \in (0, y) : A = \psi(y) -\psi(0) = \psi'(\eta) \cdot (y - 0) = (f'_y(x, \eta) - f'_y(0, \eta)) y  \]
+
+	Далее воспользуемся тем, что $f$ дважды дифференцируема:
+	\[ f'_x (x, y) = f'_{x}(0, 0) + f''_{xx}(0, 0)x + f''_{xy}(0, 0)y + o(\sqrt{x^2 + y^2}) \text { при } (x, y) \to (0, 0) \]
+	\[ f'_y (x, y) = f'_{y}(0, 0) + f''_{yx}(0, 0)x + f''_{yy}(0, 0)y + o(\sqrt{x^2 + y^2}) \text { при } (x, y) \to (0, 0) \]
+	Подставим значения:
+	\[ \varphi'(x) = (f'_{x}(0, 0) + f''_{xx}(0, 0)x + f''_{xy}(0, 0)y + o(\sqrt{x^2 + y^2}) - (f'_{x}(0, 0) + f''_{xx}(0, 0)x + o(x) = \]
+	\[ = f''_{xy}(0, 0)y + o(\sqrt{x^2 + y^2}) \]
+	\[ \psi'(y) = \ldots = f''_{yx}(0, 0)x + o(\sqrt{x^2 + y^2}) \]
+	
+	Суммируя вышесказанное, получаем: 
+	\[ A = \varphi'(\xi)x = \psi'(\eta)y = (f''_{xy}(0,0)y + o(\sqrt{\xi^2 + y^2}))x = (f''_{yx}(0,0)x + o(\sqrt{x^2 + \eta^2}))y \]
+	\[\Rightarrow f''_{xy}(0,0)yx = f''_{yx}(0,0)xy + o(x^2 + y^2) \Rightarrow f''_{xy}(0,0) = f''_{yx}(0,0) + o(1), \]
+	\[ \text{ переходя к пределу, получим } f''_{xy}(0,0) = f''_{yx}(0,0) \]
+	\end{proof}\\
+\end{theorem}
+
+\begin{remark}
+	Другое достаточное условие: если дифференцируема в окрестности $x_0$ и 
+	\[ \exists \frac{\partial^2f}{\partial x_i \partial x_j} \text{ и } \frac{\partial^2f}{\partial x_j \partial x_i} \text{, непрерывные в } x_0, \text{ то } \frac{\partial^2f}{\partial x_i \partial x_j}(x_0) = \frac{\partial^2f}{\partial x_j \partial x_i}(x_0) \]
+	(доказывалось в 5 лекции)
+\end{remark}
+
+\begin{theorem}
+	Пусть $f$ дифференцируема $k$ раз в $x_0 \in U$, тогда если $\R^n \ni h \to 0$
+	\[ d^kf(x, h) = \sum_{i_1 + \ldots + i_n = k} \frac{k!}{i_1! \ldots i_n!} \frac{\partial^k f}{\partial x_1^{i_1}\ldots \partial x_n^{i_n}} h_1^{i_1} \ldots h_n^{i_n} \]
+	\begin{proof}
+		Достаточно переставить и сгруппировать переменные с использованем предыдущей теоремы\\
+	\end{proof}
+\end{theorem}
+
+\begin{lemma}
+	Если $f$ дифференцируема $k$ раз в $x_0 \subset U,$ то $\forall h \in \R^n$ функции $g(t) = f(x + th)$ дифференцируема в $t = 0$ k раз и $g^{(k)}(0) = d^kf(x, h),$ то есть $d^kf(x, h) -$ производная k-ого порядка по направлению h\\
+	\begin{proof}
+		\[ d^kf(x, h) =  \sum^{n}_{i_1 = 1} \ldots \sum^{n}_{i_k = 1} \frac{\partial^kf(x)}{\partial x_{i_1} \ldots \partial x_{i_k}} h_{i_1} \ldots h_{i_k} \]
+		\[ g(t) = f(x + th) \Rightarrow g'(t) = \sum_{i_k = 1}^{n} \frac{\partial f(x + th)}{\partial x_{i_k}} h_{i_k} \]
+		\[ g''(t) =  \sum_{i_{k - 1} = 1}^{n} \sum_{i_k = 1}^{n} \frac{\partial^2 f(x + th)}{\partial x_{i_{k-1}} \partial x_{i_k}} h_{i_{k-1}} h_{i_k} \] 
+		\[ \cdots \cdots \]
+		\[ g^{(k-1)}(t) =  \sum^{n}_{i_2 = 1} \ldots \sum^{n}_{i_k = 1} \frac{\partial^{k-1}f(x + th)}{\partial x_{i_2} \ldots \partial x_{i_k}} h_{i_2} \ldots h_{i_k} \] 
+		\[ \varphi(t) =  \frac{\partial^{k-1}f(x + th)}{\partial x_{i_2} \ldots \partial x_{i_k}} = \frac{\partial^{k-1}f(x)}{\partial x_{i_2} \ldots \partial x_{i_k}} + \sum^{n}_{i_1 = 1} \frac{\partial^{k}f(x)}{\partial x_{i_1} \ldots \partial x_{i_k}} t h_{i_1} + o(|th|) \text{ (так как дифференцируема k раз)} \] 
+		\[ \varphi'(t) = \sum^{n}_{i_1 = 1} \frac{\partial^{k}f(x)}{\partial x_{i_1} \ldots \partial x_{i_k}} h_{i_1} \]
+		\[ g^{(k)}(0) = \lim_{t\to0}\frac{g^{(k - 1)}(t) - g^{(k - 1)}(0)}{t} = \sum^{n}_{i_1 = 1} \ldots \sum^{n}_{i_k = 1} \frac{\partial^kf(x)}{\partial x_{i_1} \ldots \partial x_{i_k}} h_{i_1} \ldots h_{i_k} \]
+	\end{proof}
+\end{lemma}
+
+\begin{theorem}
+	(Формула Тейлора с остаточным членом в форме Лагранжа) Пусть $f : U \to \R,$ где $U \subset \R^n$ дифференцируема $k$ раз в окрестности $x_0$, тогда 
+	\[ \exists \delta > 0 : \forall h \in B_{\delta}(0) \subset \R^n \text{ } \exists \Theta \in (0, 1) \text{ } f(x + h) = \sum^{k - 1}_{l = 0} \frac{d^lf(x, h)}{l!} + \frac{d^kf(x + \Theta h, h)}{k!} \]
+	\begin{proof}
+		Применим обычную формулу Тейлора с остаточным членом в форме Лагранжа для функции $g(t) = f(x_0 + th)$
+		\[ \forall t \in [0, 1] \text{ } \exists \Theta : g(t) = \sum^{k - 1}_{l = 0}\frac{g^{(l)}(0)}{l!}t^l + \frac{g^{(k)}(\Theta)}{k!}t^{k} \]
+	\end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,134 @@
+\lecture{5}{Дифференциалы высших порядков.}
+
+здесь и далее в контексте пространства $\R^n$ и точек $x, y$ $\sqrt{(x_1 - y_1)^2 + \ldots + (x_n - y_n)^2} =  r$
+
+\begin{remark}
+	Из того, что $f(x, y) = x + o(r)$ при $(x, y) \to 0$ не следует, что $\frac{f(x, y)}{x} = O(1)$ при $(x, y) \to 0$. Контрпример:
+	\[ f(x,y) = x + y^2 \Rightarrow f(x, y) = x + o(r), \text{ так как } y^2 \le x^2 + y^2 = r^2 = o(r) \]
+	\[ \text{Можно взять } x = \frac{1}{n^3}, y = \frac{1}{n}\text{ и получить, что } \frac{f(x, y)}{x} = 1 + n \to \infty \text{ при } n \to \infty \]
+\end{remark}
+
+\begin{theorem} (достаточное условие равенства смешанных производных) 
+	Пусть  в окрестности $B_r(x_0, y_0)$ $\exists \frac{\partial^2f}{\partial x \partial y} (x, y)$  и $\exists \frac{\partial^2f}{\partial y \partial x} (x, y),$ непрерывные в $(x_0, y_0),$ тогда $\frac{\partial^2f}{\partial x \partial y} (x_0, y_0) = \frac{\partial^2f}{\partial y \partial x} (x_0, y_0)$\\
+\begin{proof}
+	Не нарушая общности, пусть $(x_0, y_0) = (0, 0),$ тогда рассмотрим следующее выражение:
+	\[ A = \Big(f(x, y) - f(0, y)\Big) - \Big(f(x, 0) - f(0, 0)\Big) = \]
+	\[ = \Big(f(x, y) - f(x, 0)\Big) - \Big(f(0, y) - f(0, 0)\Big) =\]
+	\[ = f(x, y) - f(x, 0) - f(0, y) + f(0, 0) \]
+	Рассмотрим $F_1(y) = f(x, y) - f(0, y),$ можно заметить, что $A = F_1(y) - F_1(0)$ и $F_1'(y) = f'_y(x, y) - f'_y(0, y)$. Для функции $F_1$ по теореме Лагранжа 
+		\[ \exists \eta_1 \in (0, y) : A = F_1(y) - F_1(0) = F_1'(\eta_1) \cdot (y - 0) = (f'_y(x, \eta_1) - f'_y(0, \eta_1)) y  \]
+	Далее применим теорему Лагранжа ещё раз для новой функции $A = G_1(x) = (f'_y(x, \eta_1) - f'_y(0, \eta_1)) y,$
+		\[ \exists \xi_1 \in (0, x) :  A = G_1(x) - G_1(0) = G_1'(\xi_1) \cdot (x - 0) = f''_{yx}(\xi_1, \eta_1) xy  \]
+
+	Аналогично применяя теорему Лагранжа к функции $F_2(x) = f(x, y) - f(x, 0),$ можно получить следующее выражение:
+		\[ \exists \xi_2 \in (0, x) : A = F_2(x) - F_2(0) = F_2'(\xi_2) \cdot (x - 0) = (f'_x(\xi_2, y) - f'_x(\xi_2, 0)) x  \]
+	и затем, применяя её же к $A = G_2(y) = (f'_x(\xi_2, y) - f'_x(\xi_2, 0)) x,$ получим
+		\[ \exists \eta_2 \in (0, y) :  A = G_2(y) - G_2(0) = G_2'(\eta_2) \cdot (y - 0) = f''_{xy}(\xi_2, \eta_2) xy  \]
+	Суммируя вышесказанное, получаем: $f''_{yx}(\xi_1, \eta_1) xy = A = f''_{xy}(\xi_2, \eta_2) xy.$ Используя $(\xi_1, \eta_1), (\xi_2, \eta_2) \to (0, 0)$ при $(x, y) \to (0, 0)$ и то, что производные непрерывны, получим $f''_{yx}(0, 0) = f''_{xy}(0, 0).$\\
+\end{proof}
+\end{theorem}
+
+\begin{definition}
+	Если $f : U \to \R,$ где $U \subset \R^n$ дифференцируема в точке $x_0 \in U$, то функция 
+	\[ df : \R^n \to \R  \text{ ; }  df(x_0, dx) = \sum_{i = 1}^n\frac{\partial f}{\partial x_i}(x_0)dx_i \]
+	называется дифференциалом $f$ в точке $x$
+\end{definition}
+
+\begin{remark}
+	Если есть $f(x, u),$ где $u -$ какие-то параметры, то дифференциал функции $\varphi(x) = f(x, u)$ называется дифференциалом $f$ по переменной $x$ и обозначается $d_xf$
+\end{remark}
+
+\begin{exercise}
+	$f(x, u) = x_1 x_2 \cdot u_1 u_2$, то $d_xf(x, dx, u) = (x_2dx_1 + x_1dx_2) u_1 u_2$
+\end{exercise}
+
+\begin{remark}
+	Дифференцируемость $f$ в $x_0 \in U, $ равносильна
+	\[ f(x) = f(x_0) + \sum_{i = 1}^n\frac{\partial f}{\partial x_i}(x_0)(x_i - x_0{_i}) + o(r) \Leftrightarrow f(x) = f(x_0) + df(x_0, x - x_0) + o(r) \]
+	То есть дифференциал $-$ приближение первого порядка в данной точке
+\end{remark}
+
+\begin{exercise}
+	Например, при $n = 2$
+	\[ df(x_0, dx) = \frac{\partial f}{\partial x_1}(x_0)dx_1 + \frac{\partial f}{\partial x_2}(x_0)dx_2 \]
+	неформально говоря, график функции $df(x, dx)$ как функции от $dx$ представляет собой наклонную касательную плоскость по аналогии с одномерным дифференциалом, там это была касательная прямая (с точностью до сдвига на константу).
+\end{exercise}
+
+\begin{definition}
+	Пусть задана функция $f(x),$ её дифференциал в точке $x_0$
+	\[ df(x_0, dx) = \sum_{i = 1}^n\frac{\partial f}{\partial x_i}(x_0)dx_i,\]
+	 тогда дифференциал второго порядка это следующая функция:
+	\[ d^2f(x_0, dx) = d_x(df(x_0, dx)) = \sum_{i = 1}^n d\left(\frac{\partial f}{\partial x_i}(x_0)\right)dx_i = \sum_{i = 1}^n \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_i \partial x_j}(x_0)dx_idx_j \]
+\end{definition}
+
+\begin{remark}
+	Аналогично определяются дифференциалы высших порядков
+\end{remark}
+
+	\begin{theorem}(инвариантность дифференциала первого порядка) Если  $f(x) = g(h(x))$, где $h : \R^n \to \R^k, g : \R^k \to \R,$ где $h$ дифференцируема в $x_0$ и $g$ дифференцируема в $h(x_0),$ то 
+	\[ df(x_0, dx) = \sum_{i = 1}^k\frac{\partial g}{\partial y_i}(h(x_0)) dh_i(x_0, dx) \]
+\begin{proof}
+	\[ df(x_0, dx) = \sum_{j = 1}^n\frac{\partial f}{\partial x_j}(x_0)dx_j \]
+	\[ f(x) = g(h(x)) \Rightarrow \text{ по теореме о производной сложной функции } \frac{\partial f}{\partial x_j}(x_0) = \sum_{i = 1}^k\frac{\partial g}{\partial y_i}(h(x_0))\frac{\partial h_i}{\partial x_j}(x_0) \]
+	\[ df(x_0, dx) = \sum_{j = 1}^n\sum_{i = 1}^k\frac{\partial g}{\partial y_i}(h(x_0))\frac{\partial h_i}{\partial x_j}(x_0)dx_j = \sum_{i = 1}^k\frac{\partial g}{\partial y_i}(h(x_0)) dh_i(x_0, dx) \]
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+	В условиях предыдущей теоремы верно следующее:
+	\[ Df = Dg \cdot Dh \]
+	\[ (Dg)(h(x_0)) = \begin{pmatrix} \frac{\partial g}{\partial y_1} & \ldots & \frac{\partial g}{\partial y_k} \end{pmatrix} \]
+	\[ (Dh)(x_0) = \begin{pmatrix} 	\frac{\partial h_1}{\partial x_1} & \ldots & \frac{\partial h_1}{\partial x_n}\\
+						\ldots & \ldots & \ldots \\
+						\frac{\partial h_k}{\partial x_1} & \ldots & \frac{\partial h_k}{\partial x_n} \end{pmatrix} \]
+\end{remark}
+
+\begin{remark}
+	Как и в одномерном случае, дифференциал второго порядка инвариантностью не обладает
+\end{remark}
+
+\begin{claim}
+	Пусть $f : U \to \R,$ где $U \subset \R^n,$ тогда
+	\[ d^kf(x) = \sum_{i_1 = 1}^n \sum_{i_2 = 1}^n \ldots \sum_{i_k = 1}^n \frac{\partial^kf}{\partial x_{i_1} \ldots \partial x_{i_k}}(x_0) dx_{i_1} \ldots dx_{i_k} \]
+	называется дифференциалом $k-$ого порядка
+\end{claim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,246 @@
+\lecture{1}{Теорема Больцано-Вейрштрасса. Полнота.}
+
+\begin{definition}
+	($X$, $\rho$) называется метрическим пространством, если 
+	$X$ — множество, а $\rho$: $X \times X \to X$ таково, что $\forall x, y, z \in X$
+	
+		\begin{enumerate}
+			\item {$\rho(x,y) = 0 \Leftrightarrow x = y$}
+			\item {$\rho(x,y) \le \rho(x,z) + \rho(y,z)$}
+			\item {$\rho(x,y) = \rho(y,x)$}
+		\end{enumerate}
+	
+	$\rho$ — метрика на множестве $X$.
+\end{definition}
+
+\begin{exercise}
+	$(\R^n, \rho_2) - $ метрическое пространство\\
+	\[ \rho_2(x, y) = \sqrt{(x_1 - y_1)^2 + \ldots + (x_n - y_n)^2} - \text{евклидова метрика} \]
+	\[ \left( \forall p \in (0, + \infty)  \rho_p = ((x_1 - y_1)^p + \ldots + (x_n - y_n)^p)^{\frac{1}{p}} \right) \]
+\end{exercise}
+
+\begin{exercise}
+	$(\R, \rho) - $  метрическое пространство\\
+	\[ \rho(x, y) = |\arctg(x) - \arctg(y)| \]
+\end{exercise}
+
+\begin{exercise}
+	$(X, \delta) - $  метрическое пространство\\
+\[ \delta(x, y) = \begin{cases}
+	0	& \quad \text{при } x = y\\
+	1	& \quad \text{при } x \neq y
+  \end{cases} \]
+\end{exercise}
+
+Далее $(X,\rho) - $ метрическое пространство.
+
+\begin{definition}
+	$B_r(x) = \{ y \in X : \rho(x, y) < r \} - $открытый шар с радиусом r и центром в точке $x$.
+\end{definition}
+
+\begin{definition}
+	$M^c = X \backslash M - $ дополнение множества $M$.
+\end{definition}
+
+\begin{definition}
+	$x \in M$, где $M \subset X$, называется \textbf{внутренней} точкой $M$, если $\exists r > 0: B_r(x) \subset M$.
+\end{definition}
+
+\begin{definition}
+	$x \in M$, где $M \subset X$, называется \textbf{внешней} точкой $M$, если она внутренняя точка $M^c$.
+\end{definition}
+
+\begin{definition}
+	$x \in M$, где $M \subset X$, называется \textbf{граничной} точкой $M$, если она не является ни внешней, ни внутренней точкой $M$.
+\end{definition}
+
+\begin{claim}
+	Точка является либо внутренней либо внешней либо граничной по отношению к какому-то множеству, других варинтов нету, и все три взаимоисключающие.
+\end{claim}
+
+\begin{definition}
+	$G \subset X$ называется открытым, если $\forall x \in G, x - $ внутренняя точка $G$.
+\end{definition}
+
+\begin{definition}
+	$G \subset X$ называется замкнутым, если $G^c -$ открыто.
+\end{definition}
+
+\begin{definition}
+	$\forall M \subset X$ внутреннностью называется множество
+	\[ intM = \{ x\in X : x - \text{внутренняя точка } M \} \]
+\end{definition}
+
+\begin{definition}
+	$\forall M \subset X$ границей называется множество
+	\[ \partial M = \{ x\in X : x - \text{граничная точка } M \} \]
+\end{definition}
+
+\begin{definition}
+	последовательность $\{x_n\}$ сходится к $x_0$ $\Leftrightarrow \lim_{n\to\infty} \rho(x_n, x_0) = 0$
+\end{definition}
+
+\begin{claim}
+	Множество $F \subset X - $замкнуто $\Leftrightarrow$ $\forall$ $\{x_n\} \subset F$ выполнено
+	\[ \{x_n\} \to x_0 \mapsto x_0 \in F \]
+
+	\begin{proof}
+		$\Rightarrow$: 
+		Пусть $F -$ замкнуто $\Rightarrow F^c -$ открыто. \\
+		Пусть $\{ x_n \} \subset F$ и $\{ x_n \} \to x_0 \in X$. \\
+		Если $x_0 \notin F (x_0 \in F^c)$, то, так как $F^c$ открыто$, \Rightarrow \exists r > 0 : B_r(x_0) \subset F^c$.
+		Так как $\{ x_n \} \to x_0$, то есть $\rho(x_n, x_0) \to 0$ то при достаточно больших $n$, $\rho(x_n, x_0) < r$, то есть $x_n \in B_r \subset F^c$, что противоречит с тем, что $\{ x_n \} \subset F$, следовательно $x_0 \in F$. \\
+		$\Leftarrow$:
+		Докажем, что $F^c$ открыто. Пусть это не так, тогда $\exists x_0 \in F^c$, не являющаяся внутренней $\Rightarrow \forall r > 0$  $B_r(x_0) \cap F \neq \varnothing$, то есть $\forall r = \frac{1}{n} \exists x_n \in F \rho(x_n, x_0) < r \Leftrightarrow \{ x_n \} \subset F \to x_0 \notin F$, что противоречит с заданным условием. Следовательно $F^c$ открыто, значит $F$ замкнуто
+\\
+	\end{proof}
+\end{claim}
+
+\begin{definition}
+	$x \in X$, называется \textbf{точкой прикосновения} множества $M$, если $\forall r > 0$ $B_r(x) \cap M \neq \varnothing$
+\end{definition}
+
+\begin{definition}
+	$x \in X$, называется \textbf{предельной точкой} множества $M$, если $\forall r > 0$ $B_r(x) \cap M \backslash \{x\} \neq \varnothing$
+\end{definition}
+
+\begin{definition}
+	$x \in M$, называется \textbf{изолированной точкой} множества $M$, если $\exists r > 0$ $B_r(x) \cap M  = \{ x \}$
+\end{definition}
+
+\begin{remark}
+	$x \in X - $ предельная точка $\Rightarrow x -$ точка прикосновения. \\
+	$x \in X - $ точка прикосновения $\Rightarrow x -$  предельная или изолированная точка.
+\end{remark}
+
+\begin{remark}
+	Последнее утверждение может быть переформулировано: \\
+	Множество замкнуто $\Leftrightarrow$ оно содержит все свои точки прикосновения.\\
+	Множество замкнуто $\Leftrightarrow$ оно содержит все свои предельные точки.\\
+	\begin{proof}
+		Первая формулировка следует из определений. \\
+		Доказательство второй формулировки: \\
+		$\Rightarrow$: множество замкнуто $\Rightarrow$ оно содержит все свои точки прикосновения $\Rightarrow$ содержит все предельая точки.
+		$\Leftarrow$: множество содержит все свои предельная точки $\Rightarrow$ оно содержит все свои точки прикосновения, кроме изолированных $\Rightarrow$ содержит все свои точки прикосновения, так как изолированные точки принадлежат самому множеству. \\
+	\end{proof}
+\end{remark}
+
+\begin{remark}
+	$x$ — точка прикосновения $M$ $\Leftrightarrow$ $\exists \{ x_n \} \subset M : \{ x_n \} \to x$.\\
+	$x$ — предельная точка $M$ $\Leftrightarrow$ $\exists \{ x_n \} \subset M \backslash x : \{ x_n \} \to x$
+\end{remark}
+
+
+\begin{exercise}
+	$M = \{ (0, 1) \cap \Q \}$ \\
+	множество точек прикосновения $M = [0, 1]$ \\
+\end{exercise}
+
+\begin{claim}
+	Пусть $A -$ множество и $\forall a \in A$ $F_a \subset X - $ замкнуто, а $ G_a \subset X - $ открыто, тогда $\bigcap_{a\in A} F_a - $ замкнуто, а $\bigcup_{a\in A} G_a - $ открыто. \\
+То есть пересечение любого семейства замкнутых множеств замкнуто, а объединение любого семейства открытых множеств открыто.
+\end{claim}
+
+\begin{definition}
+	$M \subset X - $ называется ограниченным, если $\exists r>0, x \in X :  M \subset B_r(x)$.
+\end{definition}
+
+\begin{theorem}
+	(Больцано, Вейрштрасс) В евклидовой метрике, если множество $M \subset \R^n$ ограничено, то из любой последовательности $\{ x_m \} \in M$ можно выделить сходящуюся подпоследовательность.\\
+	\begin{proof}
+		M ограничено $\Rightarrow \exists r, x_c$ (радиус и центр шара) $\forall m$ $ \sqrt{(x_m^1 - x_c^1)^2 + \ldots + (x_m^n - x_c^n)^2} < r \Rightarrow \forall m, i$ $x_m^i < r^2 + x_c^i$, то есть любая координата $\{ x_m \}$ ограничена. \\
+		Имеется последовательность $\{ x_m \} = \{ (x_m^1, \ldots, x_m^n) \}$, из неё можно выделить подпоследовательность $\{ x_{m_k} \}$ такую, что $ \{ x_{m_k}^1 \} \to x_0^1$ (первая координата сходится к какому-то $x_0^1$, это можно сделать по обычной теореме Больцано Веёрштрасса) из выделенной подпоследовательности можно выделить подпоследовательность, чтоб сходилась вторая координата; повторяя операцию для всех координат, получим подпоследовательность $\{ x_{m_{k_l}} \} : \forall i \le n$ $\{  x_{m_{k_l}}^i \} \to x_0^i$, то есть все координаты этой подпоследовательности сходятся, это и значит, что найдена подпоследовательность $\{ x_{m_{k_l}} \}$, сходящаяся к $x_0 = (x_0^1, \ldots, x_0^n)$
+\\
+	\end{proof}
+\end{theorem}
+
+\begin{remark}
+	не во всяком МП из любой ограниченной последовательности можно выделить сходящуюся подпоследовательность, например: $(\R, \rho)$, где
+	\[ \rho(x, y) = |\arctg(x) - \arctg(y)| \]
+	\begin{proof}
+	рассмотрим $ \{x_n \} : x_n = n , M = \{ x_n \}$ — ограничено, так как $\exists r = \frac{\pi}{2}, x_c = 0 : M \subset B_r(x)$. Пусть $\{x_{n_k}\} -$ подпоследовательность, сходящаяся к какому-то $x_0$, то есть $\rho(x_{n_k}, x_0) \to 0$ при $k \to \infty$, но $\arctg(x_0) < \frac{\pi}{2}$, а $\{\arctg(x_{n_k})\} \to \frac{\pi}{2}$ при $k \to \infty$, получилось противоречие, $|\arctg(x_{n_k}) - \arctg(x_0)|$ не может стремиться к 0.\\
+	\end{proof} \\
+\end{remark}
+
+\begin{definition}
+	последовательность $\{ x_n \} - $ называется фундаментальной, если $\forall \varepsilon > 0$ $\exists N$ $\forall n, m \ge N$ $\rho(x_n, x_m) < \varepsilon$
+\end{definition}
+
+\begin{definition}
+	Метрическое пространство $(X, \rho)$ называется полным, если $\forall$ фундаментальной последовательности $\{ x_n \} \subset X$ $\exists x_0 \in X : \{ x_n \} \to x_0$, то есть любая фундаментальная последовательность имеет предел
+\end{definition}
+
+\begin{exercise}
+	$(\R, \rho_2) -$ полно\\
+	$(\Q, \rho_2) -$ неполно\\
+	$(\R, \rho)$, где $\rho(x, y) = |\arctg(x) - \arctg(y)| -$ неполно \\
+	$(\R, \delta) - $полно \\
+\end{exercise}
+
+\begin{remark}
+	Не во всяком полном МП из любой последовательности можно выделить сходящуюся подпоследовательность, например$(\R, \delta)$, где 	
+		\[ \delta(x, y) = \begin{cases}
+		0	& \quad \text{при } x = y\\
+		1	& \quad \text{при } x \neq y
+		  \end{cases} \]
+	и последовательность $\{x_n\} : x_n = n$.
+\end{remark}
+
+\begin{claim}
+	Последовательность $\{ x_n \}$ фундаментальна в $(X, \rho)$ $\Leftrightarrow \exists$ стягивающаяся последовательность замкнутых шаров $B_k$ (то есть $B_1 \subset B_2 \subset \ldots \subset B_k \subset \ldots : r(B_k) \to 0$) таких, что $\forall k$ $\exists N$ $\forall n \ge N$ $x_n \in B_k$ \\
+	\begin{proof} \\
+		$\Leftarrow:$ $\forall n, m > N$ $x_n, x_m \in B_k \Rightarrow$ $\rho(x_n, x_m) < 2r(B_k) \to 0$ при $k \to \infty$ \\
+		$\Rightarrow:$ рассмотрим последовательность $\varepsilon_k > 0 : \sum_{k=1}^{\infty} < \infty$ (например, $\varepsilon_k = \frac{1}{2^k}$). \\
+		$\forall k$ $\exists N_k : \forall n, m > N_k$ $\rho(x_n, x_m) < \varepsilon_k$, тогда возьмём последовательность вложенных шаров $B_k = B_{r_k}(x_{N_k})$, где 
+\[ r_k = \sum_{l = k}^{\infty}\varepsilon_l\]
+это и будет искомая последовательность, так как $\forall k$ $\exists N_k$ $\forall n \ge N$ $\rho(x_n, x_{N_k}) < \varepsilon_k$ $\Rightarrow$ $x_n \in B_k$, они вложенные, так как $\forall y \in B_{r_{k+1}}(x_{N_{k+1}})$ $\rho(y, x_{N_k}) \le \rho(y, x_{N_{k+1}}) + \rho(x_{N_{k+1}}, x_{N_k}) \le \sum_{l = k + 1}^{\infty} + \varepsilon_k = r_k \Rightarrow y \in B_{r_k}(x_{N_k})$ и стягивающиеся. \\
+	\end{proof}
+\end{claim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

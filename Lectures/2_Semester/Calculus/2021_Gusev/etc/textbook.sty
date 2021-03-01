@@ -1,0 +1,230 @@
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+% Section 
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries\filcenter}{\S \!\ \thesection}{1em}{}
+\usepackage[titles]{tocloft}
+\renewcommand{\cftbeforesecskip}{3pt}
+
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+% Subsection
+\titlespacing*{\subsection}{0pt}{3.5ex}{.3ex}
+\usepackage{xhfill}
+\newcommand*{\mysubsection}[2][1.4pt]{
+  \addtocounter{subsection}{1}
+  \bigskip\noindent\leavevmode\xdotfill{#1}[magenta!35!black!60]~{
+  \bfseries\large\ {\fontfamily{antt}\selectfont #2}}~\xdotfill{#1}[magenta!35!black!60]
+  \mbox{}\nobreak\par\bigskip
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection} #2}
+}
+
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+% Table of content
+\usepackage{tocloft}
+\setcounter{tocdepth}{2}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+
+\setlength{\cftsecnumwidth}{30pt}
+
+\renewcommand\cftsecpresnum{\S} % Add paragraph symbol in the table of content
+\renewcommand\cftchappresnum{Глава }
+\AtBeginDocument{\addtolength\cftchapnumwidth{\widthof{\bfseries Глава }}}  
+
+% Hyperref at table of content
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=black
+}
+
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+% Footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\makeatother
+\fancyfoot[L]{}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{}
+\fancyhead[C]{\leftmark}
+\fancyhead[L]{}
+\fancyhead[R]{}
+
+% Length to control the \fancyheadoffset and the calculation of \headline
+% simultaneously
+\newlength\FHoffset
+\setlength\FHoffset{1cm}
+
+\addtolength\headwidth{2\FHoffset}
+
+\fancyheadoffset{\FHoffset}
+
+% these lengths will control the headrule trimming to the left and right 
+\newlength\FHleft
+\newlength\FHright
+
+% here the trimmings are controlled by the user
+\setlength\FHleft{1cm}
+\setlength\FHright{0cm}
+
+% The new definition of headrule that will take into acount the trimming(s)
+\newbox\FHline
+\setbox\FHline=\hbox{\hsize=\paperwidth%
+  \hspace*{\FHleft}%
+  \rule{\dimexpr\headwidth-\FHleft-\FHright\relax}{\headrulewidth}\hspace*{\FHright}%
+}
+
+
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+% Math
+\usepackage{amsmath, amssymb, a4wide}
+\usepackage{esvect}
+\usepackage{mathrsfs}
+
+% Equal with def above
+\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{
+	\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+%Custom style
+\usepackage{amsthm, fixltx2e, etoolbox}
+\theoremstyle{definition}
+\newcommand{\sign}{\text{sign}}
+
+% Abbr
+\def\BR{\mathbb{R}}
+\def\BN{\mathbb{N}}
+\def\BZ{\mathbb{Z}}
+\def\BQ{\mathbb{Q}}
+\def\BX{\mathbb{X}}
+\def\BY{\mathbb{Y}}
+\def\BS{\mathbb{S}}
+\def\BK{\mathbb{K}}
+\def\BM{\mathbb{M}}
+\def\BF{\mathbb{F}}
+\def\BV{\mathbb{V}}
+\def\BI{\mathbb{I}}
+
+
+\def\CB{\mathcal{B}}
+\def\CC{\mathcal{C}}
+\def\CE{\mathcal{E}}
+\def\CR{\mathcal{R}}
+\def\CA{\mathcal{A}}
+\def\CF{\mathcal{F}}
+\def\CG{\mathcal{G}}
+\def\CS{\mathcal{S}}
+\def\CD{\mathcal{D}}
+\def\CH{\mathcal{H}}
+\def\CP{\mathcal{P}}
+
+\def\SP{\mathscr{P}}
+
+\def\FB{\mathfrak{B}}
+\def\FR{\mathfrak{R}}
+\def\FM{\mathfrak{M}}
+
+\def\BRPLUS{\overline{\BR}_{+}}
+\def\BRPL{\BR_{+}}
+\def\BRBIG{\overline{\BR}}
+
+\usepackage{dsfont}
+\def\DONE{\mathds{1}}
+
+\def\vp{\; \bigg\rvert \;}
+\def\svp{\; | \;}       
+\def\vt{\vartriangle}       
+
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+% Theorems
+\usepackage{xcolor}
+\usepackage[many]{tcolorbox}
+
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+
+\usepackage{mdframed}
+
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{statement}[lemma]{Утверждение}
+\newtheorem*{remark}      {Замечание}
+\newtheorem*{next1}      {Следствие 1}
+\newtheorem*{next2}      {Следствие 2}
+\newtheorem{theorem_}[lemma]{Теорема}
+\newenvironment{theorem}%
+  {\begin{mdframed}[backgroundcolor=black!30!white!30]
+  \setlength{\topsep}{-\parskip}\setlength{\partopsep}{0pt}
+  \begin{theorem_}}%
+  {\end{theorem_}\end{mdframed}}
+
+\theoremstyle{definition}
+\newtheorem{definition}[lemma]{Определение}
+\tcolorboxenvironment{definition}{
+  enhanced,
+  borderline={0.8pt}{0pt}{gray!70},
+  borderline={0.4pt}{2pt}{black},
+  boxrule=0.4pt,
+  colback=pink!70!white!30,
+  coltitle=black,
+  sharp corners
+}
+\newcommand{\mdef}[1]
+	{\! \textit{\uwave{\textcolor{red!10!black}{#1}}}}
+% http://dkhramov.dp.ua/Comp.LatexCyrillicFonts#.XMrWLegzaUk
+
+
+%https://tex.stackexchange.com/questions/223694/how-to-draw-a-text-box-with-shadow-borders-in-latex
+
+\newtheorem{exercise_}[lemma]{Пример}
+\newenvironment{exercise}%
+  {\begin{tcolorbox}[enhanced,width=6.4in,center upper,drop fuzzy shadow southwest,
+    colframe=red!50!black,colback=orange!100!yellow!50!white!30]
+  \begin{exercise_}}%
+  {\end{exercise_}\end{tcolorbox}}
+
+\usepackage{dashrule}
+\renewenvironment{proof}{\smallskip{\noindent\Large
+\color{red!50!black}\itshape$\lhd$ \normalsize Начало доказательства
+\hdashrule[0.5ex]{11cm}{0.5mm}{3mm 3pt 1mm 2pt}\hspace{1cm} }
+\small\itshape}{{\color{red!50!black}
+\hdashrule[0.5ex]{10.5cm}{0.5mm}{3mm 3pt 1mm 2pt}
+\normalsize Конец доказательства \Large$\rhd$}}  
+
+% -----------------------------------------------------------------------
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% -----------------------------------------------------------------------
+%Cross letter
+\usepackage[makeroom]{cancel}
+\usepackage[normalem]{ulem}
+
+%Multicolon
+\usepackage{paracol}
+
+% Обводка кружочком множеств
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,shapes.misc}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\def\h{{\large \rotatebox[origin=c]{180}{$\Lsh$}}}
+
+%Font
+\usepackage{libertine}

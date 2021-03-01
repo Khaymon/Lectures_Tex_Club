@@ -1,0 +1,174 @@
+\lecture{3}{Дифференцируемость функций многих переменных.}
+
+По умолчанию рассматривается $\R^d$ и $\rho_2(x,y) = \sqrt{\sum_{i=1}^d(x_i - y_i)^2}$
+
+\begin{remark}
+	Основные определения и свойства, доказанные ранее:
+		\begin{enumerate}
+			\item	$\{x_n\} \to x \in \R^d \Leftrightarrow \{\rho_2(x_n, x)\} \to 0 \Leftrightarrow \forall i = 1, 2, \ldots , d$ $\{x_n^i \} \to x^i$.
+			\item Пусть $(X, \rho)$ и $(Y, d) -$ метрические пространства, $x_0 \in X$, $f:X \to Y$. Тогда следующие утверждения эквивалентны:
+				\begin{enumerate}
+					\item $\lim_{x\to x_0} f(x) = y_0 \in Y$
+					\item $\forall \varepsilon > 0 \exists \delta > 0 \Big(\rho(x_0, x) < \delta \mapsto d(y_0, y) < \varepsilon \Big)$
+					\item $\forall$ открытого $V \subset Y : y_0 \in V$ $\exists $ открытое $U \subset X,$ для которого $f(U\backslash \{x_0\}) \subset V$
+					\item $\forall \{x_n\} \subset X: \{x_n\}\to x_0\text{ и } x_n \neq x_0 \forall n,\text{ выполнено }\{f(x_n)\} \to y_0$
+				\end{enumerate}
+			\item Пусть $f : X \to Y$, тогда следующие утверждения эквивалентны:
+				\begin{enumerate}
+					\item $f$ непрерывна на $X$
+					\item $\forall x \in X$ $\lim_{x \to x_0} f(x) = f(x_0)$
+					\item $\forall$ открытого $V \subset Y$ $f^{-1}(V)$ открыто
+					\item $\forall$ замкнутого $F \subset Y$ $f^{-1}(F)$ замкнуто (используя $f^{-1}(F^c) = (f^{-1}(F))^c$)
+				\end{enumerate}
+		\end{enumerate}
+\end{remark}
+
+\begin{definition}
+	Если $\forall$ открытого $U \subset X$ $f(U) - $ открыто, то $f$ называется открытым изображением или открытой\\
+\end{definition}
+
+\begin{definition}
+	Если $\forall$ замкнутого $F \subset X$ $f(F) - $ замкнуто, то $f$ называется замкнутым отображением или замкнутой\\
+\end{definition}
+
+\begin{exercise}
+		\[ X = Y = \R \text{ } f(x) = \begin{cases}
+				1	& \quad \text{при } x > 0\\
+				0	& \quad \text{при } x \le 0
+			  \end{cases} \text{ замкнута, но разрывна} \]
+\end{exercise}
+
+\begin{exercise}
+	$X = \{ (x, y) \in \R^2 : x^2 + y^2 = 1 \}$,  $Y = [0, 2\pi)$\\
+	$f : X \to Y, f(x) = \varphi_x,$ где $\varphi_x$ - угол поворота от 0 до точки $y$ против часовой стрелки\\
+	\begin{enumerate}
+		\item $f - $ замкнута, но разрывна, так как можно рассмотреть 
+			\[ \{ x_n \} = \{\Big( \cos (2\pi - \frac{1}{n}), \sin (2\pi - \frac{1}{n}) \Big) \}, x_n \to (1, 0), \text{ но при этом} \]
+			\[ \{f(x_n)\} = \{ 2\pi - \frac{1}{n} \} \to 2\pi, \text{ а } f((1, 0)) = 0 \]
+		\item $f -$ биекция, можно рассмотреть $f^{-1}(y) = (\cos (\varphi), \sin(\varphi)), $ она непрерывна, так как $\sin$ и $\cos$ непрерывны. Следовательно $\forall $ замкнутого $V \subset X$ $f(V) = (f^{-1})^{-1}(V)$ $\Rightarrow f -$ замкнута  
+	\end{enumerate}
+\end{exercise}
+
+Пусть $f : U \to \R^m$, где $U \subset \R^n$ открыто
+
+\begin{definition} Пусть $\nu \in \R^n -$ единичный вектор ($|\nu| = \sqrt{(\nu,\nu)}= 1$) и $x_0 \in \R^n$.\\
+	Если $\exists \lim_{t \to 0} f(x_0 + t\nu) \in \R^m,$ то этот предел называется пределом функции $f$ по направлению $\nu$ в точке $x_0$
+\end{definition}
+
+\begin{definition} Пусть $\nu \in \R^n -$ единичный вектор ($|\nu| = \sqrt{(\nu,\nu)}= 1$) и $x_0 \in \R^n$.\\
+	Если $\exists \lim_{t \to 0}\frac{f(x_0 + t\nu) - f(x_0)}{t} \in \R^m,$ то этот предел называется производной функции $f$ по направлению $\nu$ в точке $x_0$
+\end{definition}
+
+
+\begin{remark}
+	При работе с функцией многих переменных $f : U \to \R^m$, где $U \subset \R^n$ удобно её рассматривать как набор из $m$ функций, где $f _i: U \to \R$,
+\[ f(x_1,\ldots, x_n) =  \begin{pmatrix}
+	f_1(x_1, \ldots, x_n) \\
+	  \vdots \\
+	f_m(x_1, \ldots, x_n)
+	 \end{pmatrix}\]
+\end{remark}
+
+\begin{remark}
+	Производная функции $f$ по направлению $\nu$ в точке $x_0$ обозначается как $\frac{\partial f}{\partial \nu}(x_0),$
+	\[ \frac{\partial f}{\partial \nu}(x_0) =  \lim_{t\to0}\frac{f(x_0 + t\nu) - f(x_0)}{t} = \begin{pmatrix}
+  \frac{\partial f_1}{\partial \nu} \\
+  \vdots \\
+  \frac{\partial f_m}{\partial \nu}
+ \end{pmatrix} \]
+\end{remark}
+
+\begin{definition}
+	$i$-ый базисный вектор $e_i -$ вектор с координатами $(0,\ldots, 1, \ldots, 0),$ где единица стоит на $i$"=ом месте
+\end{definition}
+
+\begin{remark}
+	Если $\nu = e_i,$ то производная по этому направлению обозначается $\frac{\partial f}{\partial x_i}$ и называется частной производной по $\partial x_i$.
+	\[ \frac{\partial f}{\partial x_i}(x_0) =  \lim_{t\to0}\frac{f(x_0 + t e_i) - f(x_0)}{t} = \begin{pmatrix}
+	  \frac{\partial f_1}{\partial x_i} \\
+	  \vdots \\
+	  \frac{\partial f_m}{\partial x_i}
+	 \end{pmatrix} \]
+\end{remark}
+
+\begin{definition}
+	Матрица $A \in \R^{m\times n}$ (размера $m\times n$) называется матрицей Якоби функции $f$ в точке $x_0,$ если $f(x) = f(x_0) + A(x-x_0) + o(|x-x_0|)$ при $x \to x_0$. Пишут $A = Df_{x_0} = Df(x_0)$. Если $m = 1,$ то пишут $A = (\nabla f)(x_0)$ ($A$ - градиент $f$). $f$ называется дифференцируемой в $x_0$
+\end{definition}
+
+\begin{remark}
+	Если $f : U \to R^m$, где $U \subset \R^n$, $g : U \to R$ и $x_0 \in U,$ то $f(x) = o(g(x))$ при $x \to x_0$ означает, что $|f(x)| = o(g(x))$
+\end{remark}
+
+\begin{remark}
+	Будем обозначать $f((x,y))$ как $f(x,y)$
+\end{remark}
+
+\begin{exercise}
+		Пусть $n = 2, m = 1, f(x) = \varphi(x_1) \cdot \psi(x_2),$ где $\varphi: \R \to \R$ и $\psi : \R \to \R$ дифференцируемы в $x_0 = (0,0)$, тогда $f(x)$ также дифференцируема в $x_0$ и $(\nabla f)(x_0) = (\varphi '(0) \cdot \psi(0), \varphi(0) \cdot \psi '(0)),$ так как: \\
+	$\varphi$ дифференцируема в 0 $\Rightarrow \varphi(x) = \varphi(0) + \varphi '(0)x + o(x)$ при $x \to 0$ \\
+	$\psi$ дифференцируема в 0 $\Rightarrow \psi(x) = \psi(0) + \psi '(0)x + o(x)$ при $x \to 0$\\
+	$f(x, y) = \varphi(x) \cdot \psi(y) = (\varphi(0) + \varphi '(0)x + o(x)) \cdot (\psi(0) + \psi '(0)y + o(y)) = \varphi(0) \psi(0) + \varphi'(0) \psi(0) x + \varphi(0) \psi'(0) y + o(\sqrt{x^2 + y^2}) = \varphi(0) \psi(0) + (\varphi '(0) \cdot \psi(0), \varphi(0) \cdot \psi '(0))
+\bigl(\begin{smallmatrix}
+	x \\ y
+\end{smallmatrix} \bigr)
+ + o(\sqrt{x^2 + y^2})$ при $x \to 0$
+\end{exercise}
+
+\begin{remark}
+	Дифференцируемость влечёт непрерывность (аналогично прошлому семестру).
+\end{remark}
+
+\begin{claim}
+	Если $f$ дифференцируема в $x_0 \in \R^n$, то $\forall$ единичного $\nu \in \R^n$
+\[ \exists \frac{\partial f}{\partial \nu} = (Df(x_0)) \nu \]
+	\begin{proof}
+		Пусть $A = Df(x_0) \Rightarrow f(x) = f(x_0) + A(x - x_0) + o(|x - x_0|)$\\
+		Пусть также $x = x_0 + t \nu$, подставив, получим $ f(x_0 + t\nu) = f(x_0) + At\nu$ + o(t), то есть $$ \frac{f(x_0 + t\nu) - f(x_0)}{t} = \frac{\partial f}{\partial \nu} = A\nu + o(1),\text{ при } t \to 0,$$
+	\end{proof}
+\end{claim}
+
+\begin{remark}
+	Из $\exists$ производных по всем направлениям не следует дифференцируемость и даже непрерывность функции.
+	Контрпример $f : \R^2 \to \R$ в точке $x_0 = (0, 0)$ \[f(x) = \begin{cases}
+				1	& \quad x_2 = x_1^2 > 0\\
+				0	& \quad \text{иначе}
+			  \end{cases}\]
+	в любом направлении существует производная, равная 0, но функция недифференцируема и разрывна в $x_0$.
+\end{remark}
+
+\begin{theorem}
+	(достаточное условие дифференцируемости) Если в окрестности $x_0 \in U \subset \R^n$ функция $f: U \to \R^m$ имеет все частные производные $\frac{\partial f}{\partial x_i},$ $i = 1,2,\ldots, n$ и $\frac{\partial f}{\partial x_i}$ непрерывны в $x_0$, то $f$ дифференцируема в $x_0$, при чём $Df(x_0) = \bigl(\begin{matrix} \frac{\partial f_i}{\partial x_j} \end{matrix} \bigr)$\\
+\begin{proof}
+	(Доказательство для $n = 2, m = 1, $ а $x_0 = (0, 0)$) \\
+	Пусть $f : \R^2 \to R$, пусть $\frac{\partial f}{\partial x} (x, y)$ и $\frac{\partial f}{\partial y} (x, y)$ существуют и непрерывны в $(0, 0)$ \\
+	Рассмотрим $g(y) = f(x, y)$. По теореме Лагранжа $\exists \eta \in (0, y) :$
+\[ g(y) - g(0) = g'(\eta) y = \frac{\partial f}{\partial y} (x, \eta) y = f(x, y) - f(x, 0) \]
+аналогично для $\varphi(x) = f(x, 0)$ $\exists \xi :$
+\[  \varphi(x) - \varphi(0) = \varphi'(\xi)x = \frac{\partial f}{\partial x} (\xi, 0)x = f(x, 0) - f(0, 0) \]
+Далее рассмотрим следующую разность:
+	\[ f(x, y) - f(0, 0) = f(x, y) - f(x, 0) + f(x, 0) - f(0, 0) = \frac{\partial f}{\partial y} (x, \eta) y + \frac{\partial f}{\partial x} (\xi, 0)x = \]
+	\[ = \frac{\partial f}{\partial x} (0, 0) x + \frac{\partial f}{\partial y} (0, 0)y + \left(\frac{\partial f}{\partial x} (\xi, 0) - \frac{\partial f}{\partial x} (0, 0)\right)x + \left(\frac{\partial f}{\partial y} (x, \eta) - \frac{\partial f}{\partial y} (0, 0)\right)y = \]
+\[ = \frac{\partial f}{\partial x} (0, 0) x + \frac{\partial f}{\partial y} (0, 0)y + o(\sqrt{x^2 + y^2}) \]
+\end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
